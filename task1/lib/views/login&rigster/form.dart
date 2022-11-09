@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../controllers/controller.dart';
+import '../../controllers/controller.dart';
 
 enum Auth { login, register }
+
+Map<String, String> _auData = {'username': '', 'email': '', 'password': ''};
 
 class form extends StatelessWidget {
   const form({Key? key}) : super(key: key);
@@ -33,6 +35,14 @@ class form extends StatelessWidget {
         //in case of register
         if (watch.au == Auth.register)
           TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'invallid username';
+              }
+            },
+            onSaved: (value) {
+              _auData['username'] = value!;
+            },
             decoration: const InputDecoration(label: Text('username')),
           ),
         const SizedBox(
@@ -41,12 +51,28 @@ class form extends StatelessWidget {
         //email
         TextFormField(
           decoration: const InputDecoration(label: Text('Email')),
+          validator: (value) {
+            if (value!.isEmpty || !(value.contains('@'))) {
+              return 'invalid email';
+            }
+          },
+          onSaved: (value) {
+            _auData['email'] = value!;
+          },
         ),
         const SizedBox(
           height: 20,
         ),
         //password
         TextFormField(
+          validator: (value) {
+            if (value!.isEmpty || value.length < 8) {
+              return 'invalid password';
+            }
+          },
+          onSaved: (value) {
+            _auData['password'] = value!;
+          },
           obscureText: context.watch<control>().obscu,
           decoration: InputDecoration(
               label: const Text('Password'),

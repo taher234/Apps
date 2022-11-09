@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task1/views/login_Register.dart';
+import 'package:task1/views/login&rigster/login_Register.dart';
 
 class intro extends StatelessWidget {
   const intro({Key? key}) : super(key: key);

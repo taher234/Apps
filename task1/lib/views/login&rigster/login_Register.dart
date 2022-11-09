@@ -1,9 +1,10 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:task1/views/form.dart';
+import 'package:task1/views/home/homeScreen.dart';
 
-import '../controllers/controller.dart';
+import '../../controllers/controller.dart';
+import 'form.dart';
 
 class log_reg extends StatelessWidget {
   GlobalKey<FormState> formKey = GlobalKey();
@@ -34,7 +35,9 @@ class log_reg extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width * .9,
             height: MediaQuery.of(context).size.height * .07,
-            child: Builder(builder: (ctx) => buttonAuth(ctx, watch.au, () {})),
+            child: Builder(
+                builder: (ctx) =>
+                    buttonAuth(ctx, watch.au, () => _submit(context))),
           ),
           const SizedBox(
             height: 10,
@@ -54,6 +57,16 @@ class log_reg extends StatelessWidget {
         ]),
       ),
     )));
+  }
+
+  void _submit(BuildContext ctx) {
+    if (!(formKey.currentState!.validate())) {
+      return;
+    } else {
+      formKey.currentState?.save();
+      Navigator.of(ctx)
+          .pushReplacement(MaterialPageRoute(builder: (_) => homeScreen()));
+    }
   }
 
   ElevatedButton buttonAuth(BuildContext ctx, var cond, Function() fun) {

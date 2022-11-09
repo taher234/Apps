@@ -19,6 +19,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+          inputDecorationTheme: InputDecorationTheme(
+            fillColor: Colors.grey.withOpacity(.2),
+            filled: true,
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 0, color: Colors.white),
+                borderRadius: BorderRadius.circular(25)),
+          ),
           primarySwatch: Colors.green,
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
@@ -44,6 +51,11 @@ class MyApp extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.w300,
                 color: Colors.white,
+                fontFamily: 'Gilroy'),
+            bodyText2: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
                 fontFamily: 'Gilroy'),
             bodyText1: TextStyle(
                 fontSize: 16,
